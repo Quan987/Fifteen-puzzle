@@ -53,3 +53,40 @@ body{
 	right: 0;
 	bottom: 0;
 }
+
+@keyframes win-tile {
+    0% {
+        border: 2px solid black;
+    }
+    80% {
+        border: 4px solid gold;
+    }
+    90% {
+        transform: rotateZ(0deg);
+        border: 4px solid yellow;
+    }
+    92% {
+        transform: rotateZ(5deg) scale(1.01);
+        border: 20px solid yellow;
+    }
+    95% {
+        border: 4px solid gold;
+    }
+    100% {
+        transform: rotateZ(0deg) scale(1);
+        border: none;
+    }
+}
+
+@keyframes win-grid {
+    0% {
+        scale:100%;
+    }
+    25% {
+        scale: 110%
+    }
+    100% {
+        scale: 100%
+    }
+
+}

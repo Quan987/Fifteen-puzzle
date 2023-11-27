@@ -82,7 +82,6 @@ document.addEventListener('DOMContentLoaded', function () {
 			tiles[i].style.left = (i % gridSize * 100) + 'px';
 			tiles[i].style.top = (parseInt(i / gridSize) * 100) + 'px';
 			tiles[i].style.backgroundPosition = '-' + tiles[i].style.left + ' ' + '-' + tiles[i].style.top;
-
 		}
 		
 	}
@@ -93,3 +92,25 @@ document.addEventListener('DOMContentLoaded', function () {
 		
     };
 });
+
+
+function beginWinAnimation() {
+    counter = 0; 
+    document.querySelectorAll(".tile").forEach(tile => {
+        tile.setAttribute("style", `animation: win-tile 4s forwards; animation-delay: ${counter*55}ms`)
+        counter++
+    })
+    document.getElementById("game-container").setAttribute("style", `animation: win-grid 2s infinite; animation-delay: ${counter*300}ms;`)
+}
+
+function notifyWin() {
+    // play animation
+    beginWinAnimation()
+    // TODO: notify user somehow
+    // play music or sound effect
+}
+
+function setBg(resource) {
+    document.body.setAttribute("style", `background-image: url(${resource});`)
+}
+
