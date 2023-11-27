@@ -97,10 +97,14 @@ document.addEventListener('DOMContentLoaded', function () {
 function beginWinAnimation() {
     counter = 0; 
     document.querySelectorAll(".tile").forEach(tile => {
-        tile.setAttribute("style", `animation: win-tile 4s forwards; animation-delay: ${counter*55}ms`)
+        // tile.setAttribute("style", `animation: win-tile 4s forwards; animation-delay: ${counter*55}ms`)
+		tile.style.animation = `win-tile 4s forwards`
+		tile.style.animationDelay = `${counter*55}ms`
         counter++
     })
-    document.getElementById("game-container").setAttribute("style", `animation: win-grid 2s infinite; animation-delay: ${counter*300}ms;`)
+    // document.getElementById("game-container").setAttribute("style", `animation: win-grid 2s infinite; animation-delay: ${counter*300}ms;`)
+	document.getElementById("game-container").style.animation = `win-grid 2s infinite`
+	document.getElementById("game-container").style.animationDelay = `${counter*300}ms`
 }
 
 function notifyWin() {
@@ -108,6 +112,7 @@ function notifyWin() {
     beginWinAnimation()
     // TODO: notify user somehow
     // play music or sound effect
+	//new Audio("win.ogg").play();
 }
 
 function setBg(resource) {
