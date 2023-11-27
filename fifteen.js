@@ -7,47 +7,92 @@
 
 */
 
+
+
 document.addEventListener('DOMContentLoaded', function () {
-    var puzzleContainer = document.getElementById('puzzle-container');
-	 
-    var gridSize = 4;
 	
-	// Call the function to initialize the puzzle tiles
-    initializePuzzle(gridSize);
-	
-	document.getElementById('shuffle').addEventListener('click', function(){
-		shuffleTiles(); 
-	}); 
-	
+	var tiles;
+	// Function to set background image for tiles
+	function setBackgroundImage(imageUrl) {
+		for (var i = 0; i < tiles.length-1; i++) {
+			tiles[i].style.backgroundImage = 'url(' + imageUrl + ')';
+			tiles[i].style.backgroundSize = (100 * gridSize) + 'px ' + (100 * gridSize) + 'px';
+		}
+	}
 	function shuffleTiles() {
-        var tiles = Array.from(document.querySelectorAll('.tile:not(.empty)'));
-        for (let i = tiles.length - 1; i > 0; i--) {
-            var j = Math.floor(Math.random() * (i + 1));
-            [tiles[i].textContent, tiles[j].textContent] = [tiles[j].textContent, tiles[i].textContent];
-        }
-    }
+	
+	
+		for (var i = tiles.length-1; i > 0; i--) {
+			var j = Math.floor(Math.random() * (i + 1));
+			var temp = tiles[i].style.left;
+			tiles[i].style.left = tiles[j].style.left;
+			tiles[j].style.left = temp;
 
-    // Function to initialize the puzzle tiles
-    function initializePuzzle(gridSize) {
+			temp = tiles[i].style.top;
+			tiles[i].style.top = tiles[j].style.top;
+			tiles[j].style.top = temp;
+		}
+	}
+	
+	
+    var puzzleContainer = document.getElementById('puzzle-container');
+	
+	gridSize = 4; // Set your desired grid size
+	
+	for (var i = 1; i <= gridSize * gridSize; i++) {
+		for(var j = 1; i <= gridSize * gridSize - 1; i++){
+			var tile = document.createElement('div'); 
+			tile.innerHTML = i; 
+			tile.className = 'tile'; 
+			puzzleContainer.append(tile); 
+		}
+		if(i === gridSize * gridSize) {
+			 var emptyTile = document.createElement('div');
+			 emptyTile.className = 'tile empty';
+			 emptyTile.style.backgroundColor = '#808080'; 
+			 puzzleContainer.appendChild(emptyTile);
+		}
 		
+	}
+	
 		
-        puzzleContainer.style.gridTemplateColumns = `repeat(${gridSize}, 100px)`;
-        puzzleContainer.style.gridTemplateRows = `repeat(${gridSize}, 100px)`;
+    tiles = puzzleContainer.getElementsByTagName('div');
 
-        for (let i = 1; i <= gridSize * gridSize - 1; i++) {
-            var tile = document.createElement('div');
-            tile.className = 'tile';
-            tile.textContent = i;
-            puzzleContainer.appendChild(tile);
-        }
+    // Call the function to set the background image
+    setBackgroundImage('https://codd.cs.gsu.edu/~ntrigoso1/Project3/images/image1.jpg');
+	
+	document.getElementById('imageSelect').addEventListener('change', function () {
+		
+       imageUrl = this.value;
+       
+       setBackgroundImage(imageUrl);
+    });
+	
+	puzzleContainer.style.gridTemplateColumns = `repeat(${gridSize}, 100px)`;
+    puzzleContainer.style.gridTemplateRows = `repeat(${gridSize}, 100px)`;
+	
+	initializeGame(tiles); 
+	function initializeGame(tiles) 
+	{
+		
 
-        // Add the empty tile
-        var emptyTile = document.createElement('div');
-		emptyTile.className = 'tile empty';
-        puzzleContainer.appendChild(emptyTile);
-    }
-
+		for (var i = 0; i < tiles.length; i++) {
+			tiles[i].className = 'tile'; 
+			
+			tiles[i].style.left = (i % gridSize * 100) + 'px';
+			tiles[i].style.top = (parseInt(i / gridSize) * 100) + 'px';
+			tiles[i].style.backgroundPosition = '-' + tiles[i].style.left + ' ' + '-' + tiles[i].style.top;
+		}
+		
+	}
+    
+    document.getElementById('shuffle').onclick = function () {
+		
+		shuffleTiles();  
+		
+    };
 });
+
 
 function beginWinAnimation() {
     counter = 0; 
@@ -68,3 +113,4 @@ function notifyWin() {
 function setBg(resource) {
     document.body.setAttribute("style", `background-image: url(${resource});`)
 }
+
