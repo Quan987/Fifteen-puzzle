@@ -5,35 +5,51 @@
 	3. Multiple Backgrounds 
 	4. 
 --> 
-<html lang = "en">
+<html lang="en">
+
 <head>
-	<meta charset="UTF-8">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link href = "fifteen.css" type = "text/css" rel = "stylesheet"> 
-	<title> Fifteen </title> 
-    <script src = "fifteen.js"> </script> 
+    <link href="fifteen.css" type="text/css" rel="stylesheet">
+    <title>Fifteen</title>
+    <script src="fifteen.js"></script>
 </head>
+
 <body>
-	<h1> Fifteen Puzzle </h1>
+    <h1>Fifteen Puzzle</h1>
 
-	<p> The goal of the fifteen puzzle is to un-jumble its fifteen squares by repeatedly making moves that slide squares 
-	into the empty space. How quickly can you solve it? </p> 
-	
+    <p>The goal of the fifteen puzzle is to un-jumble its fifteen squares by repeatedly making moves that slide squares
+        into the empty space. How quickly can you solve it?</p>
 
-	<div id="game-container">
+    <form>
+        <label for="img">Select image:</label>
+        <select id="imageSelect">
+            <option value="https://codd.cs.gsu.edu/~ntrigoso1/Project3/images/image1.jpg">Image 1</option>
+            <option value="https://codd.cs.gsu.edu/~ntrigoso1/Project3/images/image2.jpg">Image 2</option>
+            <option value="https://codd.cs.gsu.edu/~ntrigoso1/Project3/images/image3.jpg">Image 3</option>
+            <option value="https://codd.cs.gsu.edu/~ntrigoso1/Project3/images/image4.jpg">Image 4</option>
+            <!-- Add more options as needed -->
+        </select>
+    </form>
+
+    <div id="game-container">
         <div id="puzzle-container"></div>
 		
-		 
+		 <button id="shuffle">Shuffle</button>
     </div>
 
-<button id = "shuffle"> Shuffle </button> 
-	
-<p> American puzzle author and mathematician Sam Loyd is often falsely credited with creating the puzzle; 
-indeed, Loyd claimed from 1891 until his death in 1911 that he invented it. The puzzle 
-was actually created around 1874 by Noyes Palmer Chapman, a postmaster in Canastota, New York. </p> 
-<div id = "validation"> 
-	<a href = "http://validator.w3.org/"> <img src = "https://codd.cs.gsu.edu/~ntrigoso1/HW2/w3c-xhtml.png" alt= "Valid XHTML"></a>
-	<a href = "http://jigsaw.w3.org/css-validator/"><img src = "https://codd.cs.gsu.edu/~ntrigoso1/HW2/w3c-css.png" alt = "Valid CSS"> </a> 
-</div> 
+   
+
+    <p>American puzzle author and mathematician Sam Loyd is often falsely credited with creating the puzzle;
+        indeed, Loyd claimed from 1891 until his death in 1911 that he invented it. The puzzle was actually created
+        around 1874 by Noyes Palmer Chapman, a postmaster in Canastota, New York.</p>
+
+    <div id="validation">
+        <a href="http://validator.w3.org/"><img src="https://codd.cs.gsu.edu/~ntrigoso1/HW2/w3c-xhtml.png"
+                alt="Valid XHTML"></a>
+        <a href="http://jigsaw.w3.org/css-validator/"><img src="https://codd.cs.gsu.edu/~ntrigoso1/HW2/w3c-css.png"
+                alt="Valid CSS"> </a>
+    </div>
 </body>
+
 </html>
