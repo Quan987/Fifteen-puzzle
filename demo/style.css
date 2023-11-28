@@ -1,0 +1,27 @@
+/* Reset CSS */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+#container {
+  width: 400px;
+  height: 400px;
+  border: 1px solid black;
+  margin: 1rem auto;
+  position: relative;
+  /* background-image: url(./pic.jpg);
+  background-repeat: no-repeat;
+  background-position: 0px -100px; */
+}
+
+.panels {
+  position: absolute;
+  background-image: url(./pic.jpg);
+  background-size: 400px;
+  background-repeat: no-repeat;
+  width: 98px;
+  height: 98px;
+  border: 1px solid red;
+}
