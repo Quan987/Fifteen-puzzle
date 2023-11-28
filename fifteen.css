@@ -23,8 +23,8 @@ body{
 
 .tile {
     border: 2px solid black;
-    height: 100px;
-    width: 100px;
+    height: 96px;
+    width: 96px;
     display: flex;
     align-items: center;
     justify-content: center; 
@@ -38,7 +38,7 @@ body{
 .moveablepiece {
 	border-color: red; 
 	color: #006600;
-	
+	text-decoration:underline;
 }
 #shuffle {
 	
