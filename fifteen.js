@@ -53,7 +53,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   for (let i = 0; i < gridSize; i++) {
     for (let j = 1; j <= gridSize; j++) {
-      textC = i * 4 + j;
+      textC = i * gridSize + j;
       if (textC == gridSize * gridSize) {
         let emptyTile = document.createElement("div");
         emptyTile.className = "tile empty";
@@ -166,7 +166,7 @@ document.addEventListener("DOMContentLoaded", function () {
         let width = Number(tilesStuff[i].getAttribute("column"));
         //Same formula as how the tile.innerHTML was initialized, so if it is in the right order
         //then it should matches the initialized innerHTML, if it is not then the puzzle isn't solved.
-        if (Number(tilesStuff[i].innerHTML) != (height - 1) * 4 + width) {
+        if (Number(tilesStuff[i].innerHTML) != (height - 1) * gridSize + width) {
           solvedVar = 0;
         }
       }
