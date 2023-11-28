@@ -1,92 +1,193 @@
-body{
-	font-family: sans-serif; 
-	text-align: center; 
+* {
+  font-family: inherit;
 }
 
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  text-align: center;
+  overflow: hidden;
+  min-height: 100vh;
+  position: relative;
+}
+
+#title {
+  text-transform: uppercase;
+  margin-top: 2rem;
+  font-size: 35px;
+}
+
+#caption,
+#closed-caption {
+  width: 450px;
+  margin: 2rem auto;
+  line-height: 1.6;
+  font-size: 16px;
+}
+
+#closed-caption {
+  margin-top: 3rem;
+}
+
+/* #button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+} */
+
+.video-bg {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: -1;
+  min-width: 100%;
+  min-height: 100%;
+}
+
+#selectImg {
+  width: 150px;
+  position: absolute;
+  top: 230px;
+  left: 250px;
+  border: 1px solid black;
+  background-color: #efefef;
+  border-radius: 3px;
+}
+
+#shuffle,
+#btn-reset {
+  width: 150px;
+  height: 40px;
+  margin: 0 auto;
+  text-align: center;
+  font-size: 16pt;
+  position: absolute;
+  top: 380px;
+  left: 250px;
+  cursor: pointer;
+}
+
+#btn-reset {
+  top: 460px;
+}
+
+#imgTitle {
+  display: block;
+  text-transform: uppercase;
+}
+
+#imageSelect {
+  width: 75px;
+  height: 30px;
+  text-align: center;
+  margin: 1.5rem 0;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+#count-text {
+  padding: 0.5rem 1rem;
+  position: absolute;
+  top: 300px;
+  right: 350px;
+  border: 1px solid black;
+  border-radius: 3px;
+  background-color: #efefef;
+  font-size: 30px;
+  line-height: 1.4;
+}
+
+/* Game implementation start */
+
 #game-container {
-	
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center; 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
 }
 
 #puzzle-container {
-    display: grid;
-    gap: 2px;
-    font-size: 32px;
-    padding: 0px;
-    position: relative;
-    place-items: center;
+  display: grid;
+  gap: 2px;
+  font-size: 32px;
+  padding: 0px;
+  position: relative;
+  place-items: center;
 }
 
 .tile {
-    border: 2px solid black;
-    height: 96px;
-    width: 96px;
-    display: flex;
-    align-items: center;
-    justify-content: center; 
-    position: absolute;
+  border: 2px solid black;
+  height: 96px;
+  width: 96px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
 }
 
 .empty {
-    background-color: #ccc; /* Set a different background color for the empty tile */
+  background-color: whitesmoke; /* Set a different background color for the empty tile */
 }
 
 .moveablepiece {
-	border-color: red; 
-	color: #006600;
-	text-decoration:underline;
+  border-color: red;
+  color: #006600;
+  text-decoration: underline;
 }
-#shuffle {
-	
-	margin-left: auto; 
-	margin-right: auto; 
-	text-align: center; 
-	font-size: 16pt; 
-	
-}
+
 #validation {
-	position: fixed; 
-	right: 0;
-	bottom: 0;
+  position: fixed;
+  right: 0;
+  bottom: 60px;
+  z-index: 10;
 }
 
 @keyframes win-tile {
-    0% {
-        border: 2px solid black;
-    }
-    80% {
-        border: 4px solid gold;
-    }
-    90% {
-        transform: rotateZ(0deg);
-        border: 4px solid yellow;
-    }
-    92% {
-        transform: rotateZ(5deg) scale(1.01);
-        border: 20px solid yellow;
-    }
-    95% {
-        border: 4px solid gold;
-    }
-    100% {
-        transform: rotateZ(0deg) scale(1);
-        border: none;
-    }
+  0% {
+    border: 2px solid black;
+  }
+  80% {
+    border: 4px solid gold;
+  }
+  90% {
+    transform: rotateZ(0deg);
+    border: 4px solid yellow;
+  }
+  92% {
+    transform: rotateZ(5deg) scale(1.01);
+    border: 20px solid yellow;
+  }
+  95% {
+    border: 4px solid gold;
+  }
+  100% {
+    transform: rotateZ(0deg) scale(1);
+    border: none;
+  }
 }
 
 @keyframes win-grid {
-    0% {
-        scale:100%;
-    }
-    25% {
-        scale: 110%
-    }
-    100% {
-        scale: 100%
-    }
+  0% {
+    scale: 100%;
+  }
+  25% {
+    scale: 110%;
+  }
+  100% {
+    scale: 100%;
+  }
+}
 
+#copyright {
+  position: fixed;
+  width: 100%;
+  left: 0;
+  bottom: 0;
+  padding-bottom: 0.5rem;
+  background-color: #333;
+  color: #f8fdfd;
+  text-align: center;
+  font-size: 12px;
+  line-height: 1.6;
 }
