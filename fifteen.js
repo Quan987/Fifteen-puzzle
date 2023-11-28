@@ -55,21 +55,6 @@ document.addEventListener('DOMContentLoaded', function () {
 	
 	gridSize = 4; // Set your desired grid size
 	
-	/*for (var i = 1; i <= gridSize * gridSize; i++) {
-		for(var j = 1; i <= gridSize * gridSize - 1; i++){
-			var tile = document.createElement('div'); 
-			tile.innerHTML = i; 
-			tile.className = 'tile'; 
-			puzzleContainer.append(tile); 
-		}
-		if(i === gridSize * gridSize) {
-			 var emptyTile = document.createElement('div');
-			 emptyTile.className = 'tile empty';
-			 emptyTile.style.backgroundColor = '#808080'; 
-			 puzzleContainer.appendChild(emptyTile);
-		}
-		
-	}*/
 	for(let i =0; i < gridSize; i++)
 	{
 		for(let j =1; j<= gridSize; j++)
