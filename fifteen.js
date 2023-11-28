@@ -214,7 +214,7 @@ function beginWinAnimation() {
     counter = 0; 
     document.querySelectorAll(".tile").forEach(tile => {
         tile.setAttribute("style", `animation: win-tile 4s forwards; animation-delay: ${counter*55}ms`)
-        counter++;
+        counter++
     })
     document.getElementById("game-container").setAttribute("style", `animation: win-grid 2s infinite; animation-delay: ${counter*300}ms;`)
 }
