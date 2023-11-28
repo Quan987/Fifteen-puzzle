@@ -68,8 +68,6 @@ document.addEventListener('DOMContentLoaded', function () {
 				emptyTile.setAttribute("row", i + 1);
 				emptyTile.setAttribute("column", j);
 				//This is to set the global variable so that we know where the empty tile is at all time
-				emptyColumn = emptyTile.getAttribute("column");
-				emptyRow = emptyTile.getAttribute("row"); 
 			 	puzzleContainer.appendChild(emptyTile);
 			}
 			else
