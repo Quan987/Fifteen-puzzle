@@ -52,7 +52,7 @@ document.addEventListener("DOMContentLoaded", function () {
   var puzzleContainer = document.getElementById("puzzle-container");
   var sizeSelection = document.getElementById("gridSizeSelect");
   var imageSelect = document.getElementById("imageSelect");
-  var gridSize = sizeSelection.value;
+  var gridSize =3;
   function setupTile(gridSize) {
     for (let i = 0; i < gridSize; i++) {
       for (let j = 1; j <= gridSize; j++) {
@@ -84,7 +84,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
   setupTile(gridSize);
   tiles = puzzleContainer.getElementsByTagName("div");
-  imageUrl = "https://codd.cs.gsu.edu/~ntrigoso1/Project3/images/image1.jpg";
+  imageUrl = "./img/image1.jpg";
   // Call the function to set the background image
   setBackgroundImage(imageUrl);
 
