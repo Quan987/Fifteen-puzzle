@@ -6,11 +6,11 @@
 	4. Puzzle Size
 
 */
-  var bgMusic;
+var bgMusic;
 document.addEventListener("DOMContentLoaded", function () {
   var tiles;
   var started = 0;
-  timerInterval = setInterval(timeFunction,1000);
+  timerInterval = setInterval(timeFunction, 1000);
   // Function to set background image for tiles
   function setBackgroundImage(imageUrl) {
     for (let i = 0; i < tiles.length - 1; i++) {
@@ -50,44 +50,41 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   var puzzleContainer = document.getElementById("puzzle-container");
-  var gridSize = 4;
-function setupTile(gridSize)
-{
-  for (let i = 0; i < gridSize; i++) {
-    for (let j = 1; j <= gridSize; j++) {
-      textC = i * gridSize + j;
-      if (textC == gridSize * gridSize) {
-        let emptyTile = document.createElement("div");
-        emptyTile.className = "tile empty";
-        //Setting attributes so we can check its location later
-        emptyTile.setAttribute("row", i + 1);
-        emptyTile.setAttribute("column", j);
-        //This is to set the global variable so that we know where the empty tile is at all time
-        puzzleContainer.appendChild(emptyTile);
-      } else {
-        let tile = document.createElement("div");
-        tile.className = "tile";
-        //Setting attributes so we can check its location later
-        tile.setAttribute("row", i + 1);
-        tile.setAttribute("column", j);
-        tile.innerHTML = textC;
-        puzzleContainer.appendChild(tile);
-        //The below is for checking if a tile is movable to apply visual effect
-        //and allowing a tile to actually be moved.
-        tile.addEventListener("mouseenter", moveCheck);
-        tile.addEventListener("mouseleave", removeHover);
-        tile.addEventListener("click", moveTile);
+  var gridSize = 3;
+  function setupTile(gridSize) {
+    for (let i = 0; i < gridSize; i++) {
+      for (let j = 1; j <= gridSize; j++) {
+        textC = i * gridSize + j;
+        if (textC == gridSize * gridSize) {
+          let emptyTile = document.createElement("div");
+          emptyTile.className = "tile empty";
+          //Setting attributes so we can check its location later
+          emptyTile.setAttribute("row", i + 1);
+          emptyTile.setAttribute("column", j);
+          //This is to set the global variable so that we know where the empty tile is at all time
+          puzzleContainer.appendChild(emptyTile);
+        } else {
+          let tile = document.createElement("div");
+          tile.className = "tile";
+          //Setting attributes so we can check its location later
+          tile.setAttribute("row", i + 1);
+          tile.setAttribute("column", j);
+          tile.innerHTML = textC;
+          puzzleContainer.appendChild(tile);
+          //The below is for checking if a tile is movable to apply visual effect
+          //and allowing a tile to actually be moved.
+          tile.addEventListener("mouseenter", moveCheck);
+          tile.addEventListener("mouseleave", removeHover);
+          tile.addEventListener("click", moveTile);
+        }
       }
     }
   }
-}
   setupTile(gridSize);
   tiles = puzzleContainer.getElementsByTagName("div");
   imageUrl = "https://codd.cs.gsu.edu/~ntrigoso1/Project3/images/image1.jpg";
   // Call the function to set the background image
-  setBackgroundImage(
-    imageUrl
-  );
+  setBackgroundImage(imageUrl);
 
   document
     .getElementById("imageSelect")
@@ -99,7 +96,7 @@ function setupTile(gridSize)
 
   puzzleContainer.style.gridTemplateColumns = `repeat(${gridSize}, 100px)`;
   puzzleContainer.style.gridTemplateRows = `repeat(${gridSize}, 100px)`;
-	
+
   initializeGame(tiles);
   function initializeGame(tiles) {
     for (let i = 0; i < tiles.length; i++) {
@@ -109,16 +106,18 @@ function setupTile(gridSize)
         "-" + tiles[i].style.left + " " + "-" + tiles[i].style.top;
     }
   }
-  document.getElementById("gridSizeSelect").addEventListener("change", function(){
-	  let parent = document.getElementById('puzzle-container');
-	  parent.innerHTML = "";
-	  gridSize = this.value;
-	  setupTile(gridSize);
-	  initializeGame(tiles);
-	  setBackgroundImage(imageUrl);
-	  parent.style.gridTemplateColumns = `repeat(${gridSize}, 100px)`;
-	  parent.style.gridTemplateRows = `repeat(${gridSize}, 100px)`;
-  });
+  document
+    .getElementById("gridSizeSelect")
+    .addEventListener("change", function () {
+      let parent = document.getElementById("puzzle-container");
+      parent.innerHTML = "";
+      gridSize = this.value;
+      setupTile(gridSize);
+      initializeGame(tiles);
+      setBackgroundImage(imageUrl);
+      parent.style.gridTemplateColumns = `repeat(${gridSize}, 100px)`;
+      parent.style.gridTemplateRows = `repeat(${gridSize}, 100px)`;
+    });
 
   document.getElementById("shuffle").onclick = function () {
     shuffleTiles();
@@ -179,14 +178,17 @@ function setupTile(gridSize)
         let width = Number(tilesStuff[i].getAttribute("column"));
         //Same formula as how the tile.innerHTML was initialized, so if it is in the right order
         //then it should matches the initialized innerHTML, if it is not then the puzzle isn't solved.
-        if (Number(tilesStuff[i].innerHTML) != (height - 1) * gridSize + width) {
+        if (
+          Number(tilesStuff[i].innerHTML) !=
+          (height - 1) * gridSize + width
+        ) {
           solvedVar = 0;
         }
       }
       if (solvedVar == 1) {
         notifyWin();
-		return clearInterval(timerInterval);
-		started = 0;
+        return clearInterval(timerInterval);
+        started = 0;
       }
     }
     // Couting score
@@ -203,22 +205,25 @@ function setupTile(gridSize)
   function moveCount() {
     count += 1;
     countMove.textContent = count;
-	if(count == 1)
-	{
-		started = 1;
-		startMusic();
-	}
+    if (count == 1) {
+      started = 1;
+      startMusic();
+    }
   }
-var timerLabel = document.getElementById("timer");
-var timer = 0;
-function timeFunction()
-{
-	if(started == 1)
-	{
-		timer++;
-		timerLabel.innerHTML = "Time: " + timer + " seconds";
-	}
-}
+  var timerLabel = document.getElementById("timer");
+  var timer = 0;
+  function timeFunction() {
+    if (started == 1) {
+      timer++;
+      timerLabel.innerHTML = timer + " s";
+    }
+  }
+
+  const btnpopup = document.querySelector(".pop-up__btnBegin");
+  const popup = document.querySelector(".pop-up");
+  btnpopup.addEventListener("click", function () {
+    popup.classList.add("hidden");
+  });
 });
 
 function beginWinAnimation() {
@@ -249,19 +254,19 @@ function notifyWin() {
 }
 
 function startMusic() {
-	// fair use
-	let m = ["https://dl.vgmdownloads.com/soundtracks/pokemon-brilliant-diamond-shining-pearl-gamerip/bvixrzrtea/1-37%20Floaroma%20Town%20%28Day%29.mp3", 
-	"https://dl.vgmdownloads.com/soundtracks/pokemon-omega-ruby-and-alpha-sapphire-super-music-complete-nintendo-3ds/qrwfcfrcyz/1-12%20Oldale%20Town.mp3",
-	"https://dl.vgmdownloads.com/soundtracks/pikmin-3/sihmnspkdg/42.%20Garden%20of%20Hope%20%28Noon%29.mp3",
-	"./snd/1.mp3",
-	"./snd/2.mp3"
-	];
-	bgMusic = new Audio(m[Math.floor(Math.random()*5)]);
-	bgMusic.loop = true;
-	bgMusic.play();
+  // fair use
+  let m = [
+    "https://dl.vgmdownloads.com/soundtracks/pokemon-brilliant-diamond-shining-pearl-gamerip/bvixrzrtea/1-37%20Floaroma%20Town%20%28Day%29.mp3",
+    "https://dl.vgmdownloads.com/soundtracks/pokemon-omega-ruby-and-alpha-sapphire-super-music-complete-nintendo-3ds/qrwfcfrcyz/1-12%20Oldale%20Town.mp3",
+    "https://dl.vgmdownloads.com/soundtracks/pikmin-3/sihmnspkdg/42.%20Garden%20of%20Hope%20%28Noon%29.mp3",
+    "./snd/1.mp3",
+    "./snd/2.mp3",
+  ];
+  bgMusic = new Audio(m[Math.floor(Math.random() * 5)]);
+  bgMusic.loop = true;
+  bgMusic.play();
 }
 
 function stopBgMusic() {
-	bgMusic.pause();
+  bgMusic.pause();
 }
-
