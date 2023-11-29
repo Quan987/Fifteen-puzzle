@@ -221,7 +221,8 @@ function notifyWin() {
 }
 
 function setBg(resource) {
-  document.body.setAttribute("style", `background-image: url(${resource});`);
+  document.body.setAttribute("style", `background-image: url(${resource});`)
+  document.getElementById("vid").remove()
 }
 
 function startMusic() {
