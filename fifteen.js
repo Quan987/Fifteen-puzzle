@@ -3,13 +3,14 @@
 	1. End-of-game notifications 
 	2. Game time with some music file 
 	3. Multiple Backgrounds 
-	4. 
+	4. Puzzle Size
 
 */
-var bgMusic;
-
+  var bgMusic;
 document.addEventListener("DOMContentLoaded", function () {
   var tiles;
+  var started = 0;
+  timerInterval = setInterval(timeFunction,1000);
   // Function to set background image for tiles
   function setBackgroundImage(imageUrl) {
     for (let i = 0; i < tiles.length - 1; i++) {
@@ -18,7 +19,6 @@ document.addEventListener("DOMContentLoaded", function () {
         100 * gridSize + "px " + 100 * gridSize + "px";
     }
   }
-  
   function shuffleTiles() {
     tiles = document.getElementsByClassName("tile");
     for (let i = tiles.length - 1; i > 0; i--) {
@@ -50,9 +50,9 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   var puzzleContainer = document.getElementById("puzzle-container");
-
-  gridSize = 4; // Set your desired grid size
-
+  var gridSize = 4;
+function setupTile(gridSize)
+{
   for (let i = 0; i < gridSize; i++) {
     for (let j = 1; j <= gridSize; j++) {
       textC = i * gridSize + j;
@@ -80,12 +80,13 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     }
   }
-
+}
+  setupTile(gridSize);
   tiles = puzzleContainer.getElementsByTagName("div");
-
+  imageUrl = "https://codd.cs.gsu.edu/~ntrigoso1/Project3/images/image1.jpg";
   // Call the function to set the background image
   setBackgroundImage(
-    "https://codd.cs.gsu.edu/~ntrigoso1/Project3/images/image1.jpg"
+    imageUrl
   );
 
   document
@@ -98,7 +99,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   puzzleContainer.style.gridTemplateColumns = `repeat(${gridSize}, 100px)`;
   puzzleContainer.style.gridTemplateRows = `repeat(${gridSize}, 100px)`;
-
+	
   initializeGame(tiles);
   function initializeGame(tiles) {
     for (let i = 0; i < tiles.length; i++) {
@@ -108,6 +109,16 @@ document.addEventListener("DOMContentLoaded", function () {
         "-" + tiles[i].style.left + " " + "-" + tiles[i].style.top;
     }
   }
+  document.getElementById("gridSizeSelect").addEventListener("change", function(){
+	  let parent = document.getElementById('puzzle-container');
+	  parent.innerHTML = "";
+	  gridSize = this.value;
+	  setupTile(gridSize);
+	  initializeGame(tiles);
+	  setBackgroundImage(imageUrl);
+	  parent.style.gridTemplateColumns = `repeat(${gridSize}, 100px)`;
+	  parent.style.gridTemplateRows = `repeat(${gridSize}, 100px)`;
+  });
 
   document.getElementById("shuffle").onclick = function () {
     shuffleTiles();
@@ -174,6 +185,8 @@ document.addEventListener("DOMContentLoaded", function () {
       }
       if (solvedVar == 1) {
         notifyWin();
+		return clearInterval(timerInterval);
+		started = 0;
       }
     }
     // Couting score
@@ -190,7 +203,22 @@ document.addEventListener("DOMContentLoaded", function () {
   function moveCount() {
     count += 1;
     countMove.textContent = count;
+	if(count == 1)
+	{
+		started = 1;
+		startMusic();
+	}
   }
+var timerLabel = document.getElementById("timer");
+var timer = 0;
+function timeFunction()
+{
+	if(started == 1)
+	{
+		timer++;
+		timerLabel.innerHTML = "Time: " + timer + " seconds";
+	}
+}
 });
 
 function beginWinAnimation() {
@@ -211,18 +239,13 @@ function beginWinAnimation() {
 }
 
 function notifyWin() {
-	stopBgMusic()
+  stopBgMusic();
   // play animation
   beginWinAnimation();
   // play music or sound effect
   new Audio("./snd/win.mp3").play();
   // TODO: notify user somehow
-  document.getElementById("title").innerText = "You win!"
-}
-
-function setBg(resource) {
-  document.body.setAttribute("style", `background-image: url(${resource});`)
-  document.getElementById("vid").remove()
+  document.getElementById("title").innerText = "You win!";
 }
 
 function startMusic() {
@@ -232,12 +255,13 @@ function startMusic() {
 	"https://dl.vgmdownloads.com/soundtracks/pikmin-3/sihmnspkdg/42.%20Garden%20of%20Hope%20%28Noon%29.mp3",
 	"./snd/1.mp3",
 	"./snd/2.mp3"
-	]
-	bgMusic = new Audio(m[Math.floor(Math.random()*5)])
-	bgMusic.loop = true
-	bgMusic.play()
+	];
+	bgMusic = new Audio(m[Math.floor(Math.random()*5)]);
+	bgMusic.loop = true;
+	bgMusic.play();
 }
 
 function stopBgMusic() {
-	bgMusic.pause()
+	bgMusic.pause();
 }
+
