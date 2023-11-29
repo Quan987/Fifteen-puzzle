@@ -50,7 +50,9 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   var puzzleContainer = document.getElementById("puzzle-container");
-  var gridSize = 3;
+  var sizeSelection = document.getElementById("gridSizeSelect");
+  var imageSelect = document.getElementById("imageSelect");
+  var gridSize =3;
   function setupTile(gridSize) {
     for (let i = 0; i < gridSize; i++) {
       for (let j = 1; j <= gridSize; j++) {
@@ -82,7 +84,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
   setupTile(gridSize);
   tiles = puzzleContainer.getElementsByTagName("div");
-  imageUrl = "https://codd.cs.gsu.edu/~ntrigoso1/Project3/images/image1.jpg";
+  imageUrl = "./img/image1.jpg";
   // Call the function to set the background image
   setBackgroundImage(imageUrl);
 
@@ -90,8 +92,7 @@ document.addEventListener("DOMContentLoaded", function () {
     .getElementById("imageSelect")
     .addEventListener("change", function () {
       imageUrl = this.value;
-
-      setBackgroundImage(imageUrl);
+	  reloadBoard();
     });
 
   puzzleContainer.style.gridTemplateColumns = `repeat(${gridSize}, 100px)`;
@@ -106,18 +107,27 @@ document.addEventListener("DOMContentLoaded", function () {
         "-" + tiles[i].style.left + " " + "-" + tiles[i].style.top;
     }
   }
-  document
-    .getElementById("gridSizeSelect")
-    .addEventListener("change", function () {
-      let parent = document.getElementById("puzzle-container");
+  document.getElementById("gridSizeSelect").addEventListener("change", function()
+	{
+		gridSize = this.value;
+		reloadBoard();
+	});
+	function reloadBoard()
+	{
+	  let parent = document.getElementById("puzzle-container");
       parent.innerHTML = "";
-      gridSize = this.value;
       setupTile(gridSize);
       initializeGame(tiles);
       setBackgroundImage(imageUrl);
       parent.style.gridTemplateColumns = `repeat(${gridSize}, 100px)`;
       parent.style.gridTemplateRows = `repeat(${gridSize}, 100px)`;
-    });
+	  count = 0;
+	  timer = 0;
+	  countMove.textContent = count;
+	  timerLabel.innerHTML = timer + " s";
+	  started = 0;
+	  stopBgMusic();
+	}
 
   document.getElementById("shuffle").onclick = function () {
     shuffleTiles();
@@ -197,8 +207,9 @@ document.addEventListener("DOMContentLoaded", function () {
   }
   // Button to reset game
   const btnReset = document.getElementById("btn-reset");
-  btnReset.addEventListener("click", function () {
-    window.location.reload();
+  btnReset.addEventListener("click", function() 
+  {
+	 window.location.reload();
   });
   let count = 0;
   const countMove = document.getElementById("count-move");
