@@ -187,13 +187,13 @@ document.addEventListener("DOMContentLoaded", function () {
       }
       if (solvedVar == 1) {
         notifyWin();
-        return clearInterval(timerInterval);
+        moveCount();
         started = 0;
+        return clearInterval(timerInterval);
       }
     }
     // Couting score
     moveCount();
-    console.log(count);
   }
   // Button to reset game
   const btnReset = document.getElementById("btn-reset");
