@@ -19,7 +19,7 @@
     <video class="video-bg" id="vid" autoplay muted loop src="./img/background.mp4"></video>
     <h1 id="title">Fifteen Puzzle</h1>
 
-    <p id="caption">The goal of the fifteen puzzle is to un-jumble its fifteen squares by repeatedly making moves that slide squares into the empty space. How quickly can you solve it?</p>
+    <p id="caption">The goal of the fifteen puzzle is to un-jumble its fifteen squares by repeatedly making moves that slide squares into the empty space. Please click Shuffle to begin playing!</p>
     
     <main id="main">
 
@@ -49,7 +49,7 @@
             </div>
 
             <button id="shuffle">Shuffle</button>
-            <button id="btn-reset">Full Reset</button>
+            <button id="btn-reset">Reset</button>
         </div>
 
         <!-- Game container -->
@@ -59,6 +59,10 @@
 
         <!-- Right container -->
         <div class="main-container" id="right-container">
+            <div id="highscore">
+                Highest Moves:
+                <div id="high-move">0</div>
+            </div>
             <div id="count-text">
                 Moves:
                 <div id="count-move">0</div>
@@ -87,7 +91,7 @@
         </div>
     </footer>
 
-    <div class="pop-up">
+    <div class="pop-up hidden">
         <h1 class="pop-up__header">Welcome to Fifteen Puzzle!</h1>
         <button class="pop-up__btnBegin">Click To Play!
         </button>

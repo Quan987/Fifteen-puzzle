@@ -52,7 +52,7 @@ document.addEventListener("DOMContentLoaded", function () {
   var puzzleContainer = document.getElementById("puzzle-container");
   var sizeSelection = document.getElementById("gridSizeSelect");
   var imageSelect = document.getElementById("imageSelect");
-  var gridSize =3;
+  var gridSize = 3;
   function setupTile(gridSize) {
     for (let i = 0; i < gridSize; i++) {
       for (let j = 1; j <= gridSize; j++) {
@@ -92,7 +92,7 @@ document.addEventListener("DOMContentLoaded", function () {
     .getElementById("imageSelect")
     .addEventListener("change", function () {
       imageUrl = this.value;
-	  reloadBoard();
+      reloadBoard();
     });
 
   puzzleContainer.style.gridTemplateColumns = `repeat(${gridSize}, 100px)`;
@@ -107,30 +107,35 @@ document.addEventListener("DOMContentLoaded", function () {
         "-" + tiles[i].style.left + " " + "-" + tiles[i].style.top;
     }
   }
-  document.getElementById("gridSizeSelect").addEventListener("change", function()
-	{
-		gridSize = this.value;
-		reloadBoard();
-	});
-	function reloadBoard()
-	{
-	  let parent = document.getElementById("puzzle-container");
-      parent.innerHTML = "";
-      setupTile(gridSize);
-      initializeGame(tiles);
-      setBackgroundImage(imageUrl);
-      parent.style.gridTemplateColumns = `repeat(${gridSize}, 100px)`;
-      parent.style.gridTemplateRows = `repeat(${gridSize}, 100px)`;
-	  count = 0;
-	  timer = 0;
-	  countMove.textContent = count;
-	  timerLabel.innerHTML = timer + " s";
-	  started = 0;
-	  stopBgMusic();
-	}
-
+  document
+    .getElementById("gridSizeSelect")
+    .addEventListener("change", function () {
+      gridSize = this.value;
+      reloadBoard();
+    });
+  function reloadBoard() {
+    let parent = document.getElementById("puzzle-container");
+    parent.innerHTML = "";
+    setupTile(gridSize);
+    initializeGame(tiles);
+    setBackgroundImage(imageUrl);
+    parent.style.gridTemplateColumns = `repeat(${gridSize}, 100px)`;
+    parent.style.gridTemplateRows = `repeat(${gridSize}, 100px)`;
+    count = 0;
+    timer = 0;
+    countMove.textContent = count;
+    timerLabel.innerHTML = timer + " s";
+    started = 0;
+    stopBgMusic();
+  }
   document.getElementById("shuffle").onclick = function () {
     shuffleTiles();
+    // Disable select grid
+    // Disable select Puzzle size
+    // Disable shuffle
+    document.getElementById("shuffle").disabled = true;
+    imageSelect.disabled = true;
+    sizeSelection.disabled = true;
   };
 
   //Checking and moving tiles stuff
@@ -207,9 +212,16 @@ document.addEventListener("DOMContentLoaded", function () {
   }
   // Button to reset game
   const btnReset = document.getElementById("btn-reset");
-  btnReset.addEventListener("click", function() 
-  {
-	 window.location.reload();
+  btnReset.addEventListener("click", function () {
+    //  window.location.reload();
+    document.getElementById("shuffle").disabled = false;
+    imageSelect.disabled = false;
+    sizeSelection.disabled = false;
+    if (count > highscore) {
+      highscore = count;
+      highmove.textContent = highscore;
+    }
+    reloadBoard();
   });
   let count = 0;
   const countMove = document.getElementById("count-move");
@@ -229,7 +241,8 @@ document.addEventListener("DOMContentLoaded", function () {
       timerLabel.innerHTML = timer + " s";
     }
   }
-
+  var highscore = 0;
+  const highmove = document.getElementById("high-move");
   const btnpopup = document.querySelector(".pop-up__btnBegin");
   const popup = document.querySelector(".pop-up");
   btnpopup.addEventListener("click", function () {

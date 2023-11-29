@@ -67,7 +67,8 @@ body {
 #shuffle,
 #btn-reset,
 #count-text,
-#count-time {
+#count-time,
+#highscore {
   width: 8rem;
   height: 3rem;
   margin: 1.2rem 0;
@@ -78,7 +79,8 @@ body {
 #selectImg,
 #selectSize,
 #count-text,
-#count-time {
+#count-time,
+#highscore {
   border: 1px solid rgba(0, 0, 0, 0.741);
   background-color: #efefef;
   border-radius: 3px;
@@ -181,6 +183,7 @@ body {
   align-items: center;
   justify-content: center;
   position: absolute;
+  cursor: pointer;
 }
 
 .empty {
