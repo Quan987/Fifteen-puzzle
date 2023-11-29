@@ -221,12 +221,10 @@ document.addEventListener("DOMContentLoaded", function () {
       highscore = count;
       highmove.textContent = highscore;
     }
-	document.querySelectorAll(".tile").forEach((tile) => {
-		tile.style.animation = ``;
-	});
-	document.getElementById(
-    "game-container"
-  ).style.animation = ``;
+    document.querySelectorAll(".tile").forEach((tile) => {
+      tile.style.animation = ``;
+    });
+    document.getElementById("game-container").style.animation = ``;
     reloadBoard();
   });
   let count = 0;
