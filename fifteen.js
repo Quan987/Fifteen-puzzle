@@ -6,6 +6,7 @@
 	4. 
 
 */
+var bgMusic;
 
 document.addEventListener("DOMContentLoaded", function () {
   var tiles;
@@ -17,6 +18,7 @@ document.addEventListener("DOMContentLoaded", function () {
         100 * gridSize + "px " + 100 * gridSize + "px";
     }
   }
+  
   function shuffleTiles() {
     tiles = document.getElementsByClassName("tile");
     for (let i = tiles.length - 1; i > 0; i--) {
@@ -209,13 +211,32 @@ function beginWinAnimation() {
 }
 
 function notifyWin() {
+	stopBgMusic()
   // play animation
   beginWinAnimation();
-  // TODO: notify user somehow
   // play music or sound effect
-  //new Audio("win.ogg").play();
+  new Audio("./snd/win.mp3").play();
+  // TODO: notify user somehow
+  document.getElementById("title").innerText = "You win!"
 }
 
 function setBg(resource) {
   document.body.setAttribute("style", `background-image: url(${resource});`);
+}
+
+function startMusic() {
+	// fair use
+	let m = ["https://dl.vgmdownloads.com/soundtracks/pokemon-brilliant-diamond-shining-pearl-gamerip/bvixrzrtea/1-37%20Floaroma%20Town%20%28Day%29.mp3", 
+	"https://dl.vgmdownloads.com/soundtracks/pokemon-omega-ruby-and-alpha-sapphire-super-music-complete-nintendo-3ds/qrwfcfrcyz/1-12%20Oldale%20Town.mp3",
+	"https://dl.vgmdownloads.com/soundtracks/pikmin-3/sihmnspkdg/42.%20Garden%20of%20Hope%20%28Noon%29.mp3",
+	"./snd/1.mp3",
+	"./snd/2.mp3"
+	]
+	bgMusic = new Audio(m[Math.floor(Math.random()*5)])
+	bgMusic.loop = true
+	bgMusic.play()
+}
+
+function stopBgMusic() {
+	bgMusic.pause()
 }
